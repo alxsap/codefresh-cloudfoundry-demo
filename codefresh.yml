@@ -20,6 +20,7 @@ steps:
 
   TestRunningApp:
     title: Test running app on Cloud Foundry
-    image: nulldriver/cf-cli-resource
+    image: appropriate/curl
     commands:
+        - env
         - curl https://${MYROUTE}
