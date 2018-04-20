@@ -9,18 +9,29 @@ steps:
         - mvn clean install
 
   DeployToCF:
-    title: Deploy to Cloud Foundry
+    title: Deploying to Cloud Foundry
+    # This image contains the Cloud Foundry command line tool
     image: nulldriver/cf-cli-resource
+    # 'cf push' needs to be executed in project folder, containing the build results from the previous step
     working_directory: ${{BuildMaven}}
     commands:
+        # Print env, as an example
         - env
+        # Login to Cloud Foundry and push app built in previous step
         - cf login -a "https://api.cf.eu10.hana.ondemand.com" -u "${USER}" -p "${PASSWORD}" -o "P1941656886trial_trial" -s "dev"
         - cf push
+        # Export ROUTE of the app for subsequent step(s). 'export' would run in step scope, 'cf_export' does the job.
         - "cf_export MYROUTE=$(cf app hello-cf-codefresh | grep routes: | sed -r 's/routes:[[:blank:]]+//g')"
 
   TestRunningApp:
-    title: Test running app on Cloud Foundry
+    title: Testing running app on Cloud Foundry
+    # This is a simple image containing 'curl'
     image: appropriate/curl
     commands:
         - env
+        # Check if connection works
         - curl https://${MYROUTE}
+        # Do further tests via script
+        - ./test/simpleTest.sh
+  
+  
