@@ -16,7 +16,7 @@ steps:
         - env
         - cf login -a "https://api.cf.eu10.hana.ondemand.com" -u "${USER}" -p "${PASSWORD}" -o "P1941656886trial_trial" -s "dev"
         - cf push
-        - cf_export MYROUTE=$(cf app hello-cf-codefresh | grep routes: | sed -r 's/routes:[[:blank:]]+//g')
+        - "cf_export MYROUTE=$(cf app hello-cf-codefresh | grep routes: | sed -r 's/routes:[[:blank:]]+//g')"
 
   TestRunningApp:
     title: Test running app on Cloud Foundry
