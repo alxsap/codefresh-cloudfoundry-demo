@@ -12,5 +12,5 @@ steps:
     working_directory: ${{BuildMaven}}
     commands:
         - env
-        - cf login -a "https://api.cf.eu10.hana.ondemand.com" -u "${P1941656886_CLF.USER}" -p "${P1941656886_CLF.PASSWORD}" -o "P1941656886trial_trial" -s "dev"
+        - cf login -a "https://api.cf.eu10.hana.ondemand.com" -u "${USER}" -p "${PASSWORD}" -o "P1941656886trial_trial" -s "dev"
         - cf push
