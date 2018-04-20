@@ -1,0 +1,15 @@
+version: '1.0'
+steps:
+  BuildMaven:
+    title: Building Maven project in Docker Image
+    image_name: maven:3.5.0-jdk-8
+    working_directory: ${{main_clone}}
+    commands:
+        - mvn clean install
+  DeployToCF:
+    title: Deploy to Cloud Foundry
+    image_name: nulldriver/cf-cli-resource
+    working_directory: ${{BuildMaven}}
+    commands:
+        - cf login -a "https://api.cf.eu10.hana.ondemand.com" -u "${{P1941656886_CLF.USER}}" -p "${{P1941656886_CLF.PASSWORD}}" -o "P1941656886trial_trial" -s "dev"
+        - cf push
