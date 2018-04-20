@@ -11,5 +11,6 @@ steps:
     image: nulldriver/cf-cli-resource
     working_directory: ${{BuildMaven}}
     commands:
-        - cf login -a "https://api.cf.eu10.hana.ondemand.com" -u "${{P1941656886_CLF.USER}}" -p "${{P1941656886_CLF.PASSWORD}}" -o "P1941656886trial_trial" -s "dev"
+        - env
+        - cf login -a "https://api.cf.eu10.hana.ondemand.com" -u "${P1941656886_CLF.USER}" -p "${P1941656886_CLF.PASSWORD}" -o "P1941656886trial_trial" -s "dev"
         - cf push
