@@ -32,6 +32,7 @@ steps:
         # Check if connection works
         - curl https://${MYROUTE}
         # Do further tests via script
+        - chmod +x ./test/simpleTest.sh
         - ./test/simpleTest.sh
   
   
